@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     color: "#8a887c",
-    fontSize: 30,
+    fontSize: 40,
     bottom: 600,
     fontWeight: "bold",
     textAlign: "center",

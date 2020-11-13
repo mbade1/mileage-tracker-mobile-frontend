@@ -1,7 +1,7 @@
-const BASE_URL = "http://127.0.0.1:3000/";
+const BASE_URL = "http://127.0.0.1:3000";
 
 export function signUpFetch(username, password) {
-  fetch(BASE_URL + "users", {
+  fetch(BASE_URL + "/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,11 +13,12 @@ export function signUpFetch(username, password) {
     }),
   })
     .then((response) => response.json())
-    .then((newUser) => console.log(newUser));
+    .then((newUser) => localStorage.setItem("id", newUser.id))
+    .catch((error) => alert(error));
 }
 
 export function logInFetch(username, password) {
-  fetch(BASE_URL + "login", {
+  fetch(BASE_URL + "/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -29,5 +30,12 @@ export function logInFetch(username, password) {
     }),
   })
     .then((response) => response.json())
-    .then((newUser) => console.log(newUser));
+    .then((newUser) => console.log(newUser))
+    .catch((error) => alert(error));
+}
+
+export function fetchUserRuns(userId) {
+  fetch(BASE_URL + "/users/" + userId + "/runs")
+    .then((resp) => resp.json())
+    .then((runs) => console.log(runs));
 }

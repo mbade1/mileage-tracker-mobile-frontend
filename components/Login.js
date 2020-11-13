@@ -22,13 +22,14 @@ const User = t.struct({
 });
 
 export default class LogIn extends React.Component {
-  onLoginClick() {
-    Actions.feedscreen();
-  }
+  //   onLoginClick() {
+  //     Actions.feedscreen();
+  //   }
 
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
     logInFetch(value.username, value.password);
+    Actions.userHomeScreen();
   };
 
   _login() {
@@ -80,8 +81,8 @@ const styles = StyleSheet.create({
 
   loginText: {
     color: "#8a887c",
-    fontSize: 60,
-    bottom: 650,
+    fontSize: 40,
+    bottom: 500,
     fontWeight: "bold",
     textAlign: "center",
     backgroundColor: "rgb(237, 222, 166)",
@@ -103,9 +104,3 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(237, 222, 166, 0.8)",
   },
 });
-
-//   {/* {/* <TextInput style={styles.username} placeholder="Username"></TextInput>
-//   <TextInput style={styles.password} placeholder="Password"></TextInput> */}
-//   <View style={styles.loginButton}>
-//     {/* <Button title="Log In" color="#8a887c" onPress={this._login} /> */}
-//   </View>{" "}

@@ -1,44 +1,11 @@
 import React from "react";
-import { Actions } from "react-native-router-flux";
-import {
-  View,
-  StyleSheet,
-  Text,
-  ImageBackground,
-  Button,
-  Alert,
-  TextInput,
-} from "react-native";
-import { signUpFetch } from "../actions/actions";
-
-import t from "tcomb-form-native";
-
-const Form = t.form.Form;
-
-const User = t.struct({
-  username: t.String,
-  password: t.String,
-});
-
-export default class SignUp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { username: "", password: "" };
-  }
-
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  handleSubmit = () => {
-    const value = this._form.getValue(); // use that ref to get the form value
-    signUpFetch(value.username, value.password);
-  };
-
-  _signup() {
-    alert("Sign Up!");
+import { Text, StyleSheet, View, ImageBackground, Form } from "react-native";
+import { fetchUserRuns } from "../actions/actions";
+export default class UserHomeScreen extends React.Component {
+  componentDidMount() {
+    //fetch User runs
+    debugger;
+    fetchUserRuns();
   }
   render() {
     return (
@@ -47,15 +14,7 @@ export default class SignUp extends React.Component {
           style={styles.backgroundImage}
           source={require("../assets/home-background.jpg")}
         >
-          <Text style={styles.loginText}>Sign Up</Text>
-          <View style={styles.loginButton}>
-            <Form
-              ref={(c) => (this._form = c)}
-              style={styles.username}
-              type={User}
-            />
-            <Button title="Sign Up" onPress={this.handleSubmit} />
-          </View>
+          <Text style={styles.loginText}>Login</Text>
           <View style={styles.loginButton}></View>
         </ImageBackground>
       </View>
@@ -68,7 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
-    bottom: 50,
+    bottom: 70,
     top: 1,
   },
   container: {
@@ -79,7 +38,7 @@ const styles = StyleSheet.create({
   loginButton: {
     color: "#8a887c",
     fontSize: 60,
-    bottom: 100,
+    bottom: 150,
     fontWeight: "bold",
     textAlign: "center",
     backgroundColor: "rgba(237, 222, 166, 0.8)",
@@ -87,8 +46,8 @@ const styles = StyleSheet.create({
 
   loginText: {
     color: "#8a887c",
-    fontSize: 40,
-    bottom: 500,
+    fontSize: 60,
+    bottom: 650,
     fontWeight: "bold",
     textAlign: "center",
     backgroundColor: "rgb(237, 222, 166)",
