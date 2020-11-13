@@ -3,13 +3,12 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Home from "./components/Home";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Home />
-      <StatusBar style="auto" />
-    </View>
-  );
+import Navigator from "./components/Navigator";
+
+export default class App extends React.Component {
+  render() {
+    return <Navigator />;
+  }
 }
 
 const styles = StyleSheet.create({
@@ -20,3 +19,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+// export default function App() {
+//   const Stack = createStackNavigator();
+
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         <View style={styles.container}>
+//           <Stack.Screen name="Home" component={Home} />;
+//         </View>
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// }

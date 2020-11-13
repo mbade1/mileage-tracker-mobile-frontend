@@ -1,19 +1,50 @@
 import React from "react";
-import { View, StyleSheet, Text, ImageBackground } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  ImageBackground,
+  Button,
+  Alert,
+} from "react-native";
 
-function Home(props) {
-  return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../assets/home-background.jpg")}
-        style={styles.backgroundImage}
-      >
-        <Text style={styles.logo}>Running Mileage Tracker App</Text>
-        <Text style={styles.loginButton}>Log In</Text>
-        <Text style={styles.signUpButton}>Sign Up</Text>
-      </ImageBackground>
-    </View>
-  );
+import { Actions } from "react-native-router-flux";
+
+class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: "",
+    };
+  }
+
+  _login() {
+    Actions.login();
+  }
+
+  _signUp() {
+    alert("You will sign up!");
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <ImageBackground
+          source={require("../assets/home-background.jpg")}
+          style={styles.backgroundImage}
+        >
+          <Text style={styles.logo}>Running Mileage Tracker App</Text>
+          <View style={styles.loginButton}>
+            <Button title="Log In" color="#8a887c" onPress={this._login} />
+          </View>
+          <View style={styles.signUpButton}>
+            <Button title="Sign Up" color="#8a887c" onPress={this._signUp} />
+          </View>
+        </ImageBackground>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
