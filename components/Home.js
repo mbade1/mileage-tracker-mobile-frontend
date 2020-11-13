@@ -24,7 +24,7 @@ class Home extends React.Component {
   }
 
   _signUp() {
-    alert("You will sign up!");
+    Actions.signup();
   }
 
   render() {
