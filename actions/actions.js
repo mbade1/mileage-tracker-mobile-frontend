@@ -13,25 +13,33 @@ export function signUpFetch(username, password) {
     }),
   })
     .then((response) => response.json())
-    .then((newUser) => localStorage.setItem("id", newUser.id))
+    .then((newUser) => fetchUserRuns(newUser.id))
     .catch((error) => alert(error));
 }
 
 export function logInFetch(username, password) {
-  fetch(BASE_URL + "/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      username: username,
-      password: password,
-    }),
-  })
-    .then((response) => response.json())
-    .then((newUser) => console.log(newUser))
-    .catch((error) => alert(error));
+  return (dispatch) => {
+    fetch(BASE_URL + "/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((newUser) => {
+        if (newUser.id) {
+          dispatch({ type: "SET_USER", payload: newUser });
+        } else {
+          alert(newUser.message);
+        }
+      })
+      .catch((error) => alert(error));
+  };
 }
 
 export function fetchUserRuns(userId) {

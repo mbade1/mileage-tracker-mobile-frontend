@@ -35,6 +35,7 @@ export default class SignUp extends React.Component {
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
     signUpFetch(value.username, value.password);
+    Actions.userHomeScreen({ username: value.username });
   };
 
   _signup() {

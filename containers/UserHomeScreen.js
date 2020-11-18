@@ -3,9 +3,7 @@ import { Text, StyleSheet, View, ImageBackground, Form } from "react-native";
 import { fetchUserRuns } from "../actions/actions";
 export default class UserHomeScreen extends React.Component {
   componentDidMount() {
-    //fetch User runs
     debugger;
-    fetchUserRuns();
   }
   render() {
     return (
@@ -14,7 +12,7 @@ export default class UserHomeScreen extends React.Component {
           style={styles.backgroundImage}
           source={require("../assets/home-background.jpg")}
         >
-          <Text style={styles.loginText}>Login</Text>
+          <Text style={styles.loginText}>Welcome, {this.props.username}</Text>
           <View style={styles.loginButton}></View>
         </ImageBackground>
       </View>

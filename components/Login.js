@@ -14,6 +14,8 @@ import t from "tcomb-form-native";
 
 import { logInFetch } from "../actions/actions";
 
+import { connect } from "react-redux";
+
 const Form = t.form.Form;
 
 const User = t.struct({
@@ -21,15 +23,21 @@ const User = t.struct({
   password: t.String,
 });
 
-export default class LogIn extends React.Component {
+class LogIn extends React.Component {
   //   onLoginClick() {
   //     Actions.feedscreen();
   //   }
+  constructor(props) {
+    this.state = {
+      username: "",
+      password: "",
+    };
+  }
 
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
     logInFetch(value.username, value.password);
-    Actions.userHomeScreen();
+    Actions.userHomeScreen({ username: value.username });
   };
 
   _login() {
@@ -104,3 +112,11 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(237, 222, 166, 0.8)",
   },
 });
+
+const mapStateToProps = (state) => {
+  return {
+    username: state.username,
+  };
+};
+
+export default connect(mapStateToProps, { logInFetch })(LogIn);

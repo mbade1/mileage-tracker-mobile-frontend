@@ -1,13 +1,26 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Home from "./components/Home";
+import { createStore, applyMiddleware, compose } from "redux";
+import rootReducer from "./reducers/Reducer";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
 
 import Navigator from "./components/Navigator";
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
+
 export default class App extends React.Component {
   render() {
-    return <Navigator />;
+    return (
+      <Provider store={store}>
+        <Navigator />
+      </Provider>
+    );
   }
 }
 
@@ -19,17 +32,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-// export default function App() {
-//   const Stack = createStackNavigator();
-
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator>
-//         <View style={styles.container}>
-//           <Stack.Screen name="Home" component={Home} />;
-//         </View>
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// }
