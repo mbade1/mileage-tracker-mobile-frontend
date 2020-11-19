@@ -1,5 +1,6 @@
 const BASE_URL = "http://127.0.0.1:3000";
 
+import storage from "../components/Storage";
 export function signUpFetch(username, password) {
   fetch(BASE_URL + "/users", {
     method: "POST",
@@ -13,7 +14,7 @@ export function signUpFetch(username, password) {
     }),
   })
     .then((response) => response.json())
-    .then((newUser) => fetchUserRuns(newUser.id))
+    .then((newUser) => console.log(newUser.id))
     .catch((error) => alert(error));
 }
 
@@ -31,13 +32,7 @@ export function logInFetch(username, password) {
       }),
     })
       .then((response) => response.json())
-      .then((newUser) => {
-        if (newUser.id) {
-          dispatch({ type: "SET_USER", payload: newUser });
-        } else {
-          alert(newUser.message);
-        }
-      })
+      .then((newUser) => storage.setItem({ user: newUser }))
       .catch((error) => alert(error));
   };
 }

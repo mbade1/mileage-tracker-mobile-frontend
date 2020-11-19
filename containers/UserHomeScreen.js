@@ -1,9 +1,16 @@
 import React from "react";
 import { Text, StyleSheet, View, ImageBackground, Form } from "react-native";
 import { fetchUserRuns } from "../actions/actions";
+import { AsyncStorage } from "react-native";
+import storage from "../components/Storage";
+
 export default class UserHomeScreen extends React.Component {
   componentDidMount() {
     debugger;
+    let user = storage
+      .getAllDataForKey("user")
+      .then((user) => console.log(user));
+    fetchUserRuns(user.id);
   }
   render() {
     return (

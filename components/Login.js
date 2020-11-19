@@ -24,10 +24,8 @@ const User = t.struct({
 });
 
 class LogIn extends React.Component {
-  //   onLoginClick() {
-  //     Actions.feedscreen();
-  //   }
   constructor(props) {
+    super();
     this.state = {
       username: "",
       password: "",
@@ -113,10 +111,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => {
-  return {
-    username: state.username,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     username: this.state.username,
+//   };
+// };
 
-export default connect(mapStateToProps, { logInFetch })(LogIn);
+export default connect(null, { logInFetch })(LogIn);
